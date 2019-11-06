@@ -25,7 +25,6 @@ export default {
     height: 25vh;
     background: url("../assets/noface.gif") no-repeat;
     background-size: 100% 100%;
-
   }
 }
 </style>
