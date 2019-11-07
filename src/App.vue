@@ -1,63 +1,83 @@
 <template>
   <div id="app">
-    <div class="header">
-      <div class="login" @click="showUserInfo">
-        <img src="./assets/category.png" alt class="img-content" />
-        <img src="./assets/akari.jpg" alt class="img-login" />
+    <div class="bill-header-m">
+      <div class="nav-menu">
+        <div class="blur-bg"></div>
+        <div class="nav-mask"></div>
+        <div class="nav-wrapper">
+          <div class="nav-wrapper-left">
+            <ul class="nav-con-ul">
+              <li class="nav-item">
+                <a class="t" href>
+                  <i class="header-icon-bilibili-tv"></i>
+                  主站
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>游戏中心</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>直播</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>会员购</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>漫画</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>赛事</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>BW</a>
+              </li>
+              <li class="nav-item">
+                <a class="t" href>
+                  <i class="header-icon-Navbar_mobile"></i>
+                  下载APP
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-wrapper-right">
+            <div class="nav-con">
+              <ul class="nav-con-ul">
+                <li class="nav-item">
+                  <a class="t" href>
+                    <img class="face" src="./assets/akari.jpg" alt />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="t" href>动态</a>
+                </li>
+                <li class="nav-item">
+                  <a class="t" href>历史</a>
+                </li>
+                <li class="nav-item">
+                  <a class="t" href>创作中心</a>
+                </li>
+              </ul>
+              <div class="up-load">
+                <a class="u-link" href>投稿</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="search">
-        <van-search
-          placeholder="请输入搜索关键词"
-          v-model="keyword"
-          shape="round"
-          width="50vw"
-          height="7vh"
-        />
-      </div>
-
-      <div class="img-wrap">
-        <img src="./assets/game.png" alt class="img" />
-        <img src="./assets/download.png" alt class="img" />
-        <img src="./assets/envelope.png" alt class="img-envelope" />
-      </div>
-    </div>
-
-    <div class="nav"></div>
-    <div class="footer"></div>
-
-    <div class="user" v-show="isShow">
-      <User class="info" />
-      <div class="masking" @click="closeUserInfo"></div>
+      <div class="header-banner"></div>
     </div>
   </div>
 </template>
 
 <script>
-import User from "@/views/User";
 export default {
   data() {
-    return {
-      isShow: false,
-      keyword: ""
-    };
+    return {};
   },
 
-  methods: {
-    // 展示用户信息
-    showUserInfo() {
-      this.isShow = true;
-    },
+  methods: {},
 
-    // 关闭用户信息
-    closeUserInfo() {
-      this.isShow = false;
-    }
-  },
-
-  components: {
-    User
-  }
+  components: {}
 };
 </script>
 
@@ -72,12 +92,11 @@ export default {
 }
 
 .fullWidth {
-  width: 100vw;
+  width: 100%;
 }
 
-.img {
-  width: 15%;
-  height: 60%;
+a {
+  text-decoration: none;
 }
 
 #app {
@@ -86,88 +105,142 @@ export default {
   position: relative;
 }
 
-.header {
+.bill-header-m {
   .fullWidth;
-  height: 8.5vh;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
+  height: 228px;
+  font-size: 12px;
 
-  .login {
-    width: 15vw;
-    height: 8.5vh;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
+  .nav-menu {
+    .fullWidth;
+    height: 42px;
+    position: relative;
 
-    .img-content {
-      width: 3vw;
-      height: 70%;
+    .blur-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("./assets/background.png");
+      background-position: no-repeat;
+      background-position: center -10px;
+      filter: blur(4px);
+      z-index: -20;
     }
 
-    .img-login {
-      width: 9vw;
-      height: 60%;
-      border-radius: 50%;
-      margin: -1vh 0 0 0;
+    .nav-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: hsla(0, 0%, 100%, 0.4);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      z-index: -10;
+    }
+
+    .nav-wrapper {
+      width: 75%;
+      height: 42px;
+      margin: 0 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      .nav-con-ul {
+        list-style: none;
+        display: flex;
+        flex-flow: row nowrap;
+
+        .nav-item {
+          .t {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 42px;
+            color: #222;
+            padding: 0 7px;
+            font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei,
+              Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+          }
+        }
+      }
+
+      .nav-wrapper-left {
+        position: relative;
+        .header-icon-bilibili-tv {
+          position: relative;
+          display: inline-block;
+          width: 15px;
+          height: 42px;
+          // font-size: 16px;
+          color: #00a1d6;
+        }
+
+        .header-icon-bilibili-tv::before {
+          content: "\E668";
+        }
+
+        .header-icon-Navbar_mobile {
+          position: relative;
+          display: inline-block;
+          width: 15px;
+          height: 42px;
+          // font-size: 16px;
+          color: #23ade5;
+        }
+
+        .header-icon-Navbar_mobile::before {
+          content: "\E724";
+        }
+      }
+
+      .nav-wrapper-right {
+        .nav-con {
+          display: flex;
+          flex-flow: row nowrap;
+        }
+
+        .face {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: block;
+          margin: 5px auto;
+        }
+
+        .up-load {
+          width: 68px;
+          height: 48px;
+          margin: 0 0 0 10px;
+
+          .u-link {
+            display: block;
+            width: 100%;
+            height: 46px;
+            line-height: 42px;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background-color: #f45a8d;
+            border-radius: 0 0 6px 6px;
+          }
+        }
+      }
     }
   }
 
-  .search {
-    width: 50vw;
-    height: 8.5vh;
-  }
-
-  .img-wrap {
-    width: 40vw;
-    height: 8.5vh;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-around;
+  .header-banner {
+    .fullWidth;
     position: relative;
-  }
-
-  .img-envelope {
-    .img;
-    transform: scale(0.8, 0.7);
-  }
-}
-
-.nav {
-  .fullWidth;
-  height: 80vh;
-  // background: @red;
-}
-
-.footer {
-  .fullWidth;
-  height: 10vh;
-  // background: @blue;
-}
-
-.user {
-  .fullWidth;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  display: flex;
-
-  .info {
-    width: 75vw;
-    height: 100vh;
-    position: relative;
-  }
-
-  .masking {
-    width: 25vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.575);
+    z-index: -50;
+    height: 170px;
+    margin-top: -42px;
+    background: url("./assets/background.png");
+    background-position: no-repeat;
+    background-position: center -10px;
   }
 }
 </style>

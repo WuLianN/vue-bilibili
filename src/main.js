@@ -5,8 +5,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import { Search } from 'vant'
-Vue.use(Search);
+
 
 new Vue({
   router,

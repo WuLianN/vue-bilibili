@@ -1,9 +1,9 @@
 # vue-bilibili
 
-注：api的来源 https://github.com/code-mcx/react-bilibili
+注：api的来源 https://github.com/lybenson/bilibili-vue
 
 ```
-本项目用来练习vue，仅此而已。 :dog:
+使用 bilibili-api 练习、开发vue项目，仅此而已。 
 ```
 
 
