@@ -5,7 +5,6 @@ export const banner = serverRoot + '/banner'
 
 export const ranking3 = serverRoot + '/ranking3'
 
-
 // 推广
 export const promote = serverRoot + '/promote'
 
@@ -20,3 +19,6 @@ export const contentrank = serverRoot + '/contentrank'
 
 // 一周排行
 export const contentrankweek = serverRoot + '/contentrankweek'
+
+// 主站头部背景图
+export const topbg = serverRoot + '/topbg' 

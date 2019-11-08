@@ -60,3 +60,12 @@ export const contentrankApi = {
 	}
 }
 
+// 主站头部背景图
+export const topbgApi = {
+	getTopBg() {
+		return axios.get(url.topbg).then(response => {
+			return response.data;
+		})
+	}
+}
+
