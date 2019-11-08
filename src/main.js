@@ -5,15 +5,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import {
-  Carousel,
-  CarouselItem,
-  Image
-} from 'element-ui'
-
 import './plugins/element.js'
-
-Vue.use(Carousel, CarouselItem, Image)
 
 new Vue({
   router,
