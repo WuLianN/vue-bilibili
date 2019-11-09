@@ -14,12 +14,11 @@ router.get('/ranking3', async (ctx, next) => {
 // 一周排行
 router.get('/ranking7', async (ctx, next) => {
   let response = await axios.get(ranking7)
-  console.log('七日排行')
   ctx.body = response.data
 })
 
 // 昨日排行
-router.get('/randking', async (ctx, next) => {
+router.get('/ranking', async (ctx, next) => {
   let response = await axios.get(randking)
   ctx.body = response.data
 })

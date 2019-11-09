@@ -31,7 +31,7 @@ module.exports = {
       proxy: {
         // 配置跨域
         '/': {
-          target: 'http://localhost:3011',
+          target: 'http://localhost:5090',
           ws: true,
           changeOrigin: true,
         },

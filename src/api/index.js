@@ -10,11 +10,25 @@ export const bannerApi = {
 	}
 }
 
-// 排行榜
 export const rankApi = {
+	// 三日排行
 	ranking3() {
 		return axios.get(url.ranking3).then((response) => {
 			return response.data
+		})
+	},
+
+	// 昨日排行
+	rankingYesterday() {
+		return axios.get(url.rankingYesterday).then(response => {
+			return response.data;
+		})
+	},
+
+	// 一周排行
+	ranking7() {
+		return axios.get(url.ranking7).then(response => {
+			return response.data;
 		})
 	}
 }

@@ -1,9 +1,17 @@
 
 const serverRoot = `${process.env.NODE_ENV === 'production' ? 'http://www.lybenson.com' : 'http://127.0.0.1'}:9050`
 
+// 轮播图
 export const banner = serverRoot + '/banner'
 
+// 三日排行(轮播图右侧)
 export const ranking3 = serverRoot + '/ranking3'
+
+// 昨日排行(轮播图右侧)
+export const rankingYesterday = serverRoot + '/ranking'
+
+// 一周排行(轮播图右侧)
+export const ranking7 = serverRoot + '/ranking7'
 
 // 推广
 export const promote = serverRoot + '/promote'
