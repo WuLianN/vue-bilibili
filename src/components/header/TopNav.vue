@@ -64,6 +64,17 @@
       </div>
     </div>
     <div class="topNav-bg" :style="{background: `url(${topBg})`}"></div>
+    <div class="topNav-search">
+      <a class="link-ranking" href>
+        <span class="ranking-title">排行榜</span>
+      </a>
+      <form class="search-form" action>
+        <input class="search-input" type="text" placeholder="8大手机系统全面体验！" />
+      </form>
+      <button class="search-button"></button>
+    </div>
+
+    <img class="topNav-logo" :src="litpic" alt />
   </div>
 </template>
 
@@ -72,7 +83,8 @@ import { topbgApi } from "../../api/index";
 export default {
   data() {
     return {
-      topBg: ""
+      topBg: "",
+      litpic: ""
     };
   },
 
@@ -85,6 +97,7 @@ export default {
     getTopBg() {
       topbgApi.getTopBg().then(res => {
         this.topBg = res.data[0].pic;
+        this.litpic = res.data[0].litpic;
       });
     }
   }
@@ -225,6 +238,86 @@ export default {
     margin-top: -42px;
     background-position: no-repeat;
     background-position: center -10px;
+  }
+
+  .topNav-search {
+    width: 342px;
+    height: 36px;
+    position: absolute;
+    bottom: 20px;
+    right: 190px;
+    width: 268px;
+    height: 32px;
+    padding: 2px 2px 2px 72px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    font-size: 12px;
+    display: flex;
+    flex-flow: row nowrap;
+
+    .link-ranking {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      height: 32px;
+      line-height: 32px;
+      background-color: hsla(0, 0%, 100%, 0.88);
+      border-radius: 4px;
+      width: 68px;
+      transition: background-color 0.2s;
+
+      .ranking-title {
+        padding-left: 26px;
+        color: #f25d8e;
+        display: inline-block;
+        background: url(../../assets/icons.png) -659px -655px no-repeat;
+      }
+    }
+
+    .search-form {
+      background-color: hsla(0, 0%, 100%, 0.88);
+      display: block;
+      height: 32px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      transition: background-color 0.2s;
+
+      .search-input {
+        width: 196px;
+        color: #222;
+        font-size: 12px;
+        overflow: hidden;
+        height: 32px;
+        line-height: 32px;
+        padding: 0 12px;
+        border: 0;
+        box-shadow: none;
+        background-color: transparent;
+      }
+    }
+
+    .search-button {
+      display: block;
+      position: absolute;
+      right: 2px;
+      width: 48px;
+      min-width: 0;
+      cursor: pointer;
+      height: 32px;
+      background: url(../../assets/icons.png) -653px -720px;
+      background-color: hsla(0, 0%, 100%, 0.88);
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .topNav-logo {
+    position: absolute;
+    width: 220px;
+    height: 105px;
+    left: 200px;
+    top: 55px;
   }
 }
 </style>

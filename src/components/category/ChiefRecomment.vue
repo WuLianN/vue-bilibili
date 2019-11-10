@@ -15,9 +15,22 @@
             </div>
       </div>-->
       <div class="threeDays">
-        <div class="card" v-for="(item,index) in threeDaysRank" :key="index">
-          <el-image class="card-img" :src="item.pic" lazy></el-image>
-          <span class="card-title">{{item.title}}</span>
+        <div
+          class="card"
+          v-for="(item,index) in threeDaysRank"
+          :key="index"
+          @mouseover="showDetail(index)"
+          @mouseout="closeDetail(index)"
+        >
+          <div>
+            <el-image class="card-img" :src="item.pic" lazy></el-image>
+            <span class="card-title" v-show="!isShowDetail[index]">{{item.title}}</span>
+            <div class="card-detail" v-show="isShowDetail[index]">
+              <p class="card-fullTitle">{{ item.title }}</p>
+              <p class="card-author">up主: {{item.author}}</p>
+              <p class="card-play">播放: {{item.play}}</p>
+            </div>
+          </div>
         </div>
       </div>
       <!-- <div class="oneWeek">
@@ -39,7 +52,8 @@ export default {
       banner: [],
       yesterdayRank: [],
       threeDaysRank: [],
-      oneWeekRank: []
+      oneWeekRank: [],
+      isShowDetail: [false, false, false, false, false, false, false, false]
     };
   },
 
@@ -77,6 +91,14 @@ export default {
       rankApi.ranking7().then(res => {
         this.oneWeekRank = res.recommend.list;
       });
+    },
+
+    showDetail(index) {
+      this.$set(this.isShowDetail, index, true);
+    },
+
+    closeDetail(index) {
+      this.$set(this.isShowDetail, index, false);
     }
   }
 };
@@ -89,7 +111,7 @@ export default {
   position: relative;
   width: 75%;
   height: 220px;
-  margin: 0 auto;
+  margin: 0 auto 40px auto;
   .carousel {
     width: 440px;
     height: 220px;
@@ -133,6 +155,42 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+
+      .card-detail {
+        position: absolute;
+        top: 0;
+        width: 160px;
+        height: 100px;
+        margin: 5px 5px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+
+        .card-fullTitle {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          width: 140px;
+          height: 30px;
+          font-size: 12px;
+          overflow: hidden;
+        }
+
+        .card-author {
+          color: #99a2aa;
+          position: absolute;
+          bottom: 28px;
+          left: 10px;
+          font-size: 12px;
+        }
+
+        .card-play {
+          color: #99a2aa;
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          font-size: 12px;
+        }
       }
     }
   }
