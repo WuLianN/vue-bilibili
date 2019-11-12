@@ -69,7 +69,7 @@
         <span class="ranking-title">排行榜</span>
       </a>
       <form class="search-form" action>
-        <input class="search-input" type="text" placeholder="8大手机系统全面体验！" />
+        <input class="search-input" type="text" :placeholder="defaultSearchWords" />
       </form>
       <button class="search-button"></button>
     </div>
@@ -79,17 +79,20 @@
 </template>
 
 <script>
-import { topbgApi } from "../../api/index";
+import { topbgApi, getSearchDefaultWords } from "../../api/index";
+
 export default {
   data() {
     return {
       topBg: "",
-      litpic: ""
+      litpic: "",
+      defaultSearchWords: ""
     };
   },
 
   created() {
     this.getTopBg();
+    this.getSearchDefaultWords();
   },
 
   methods: {
@@ -98,6 +101,13 @@ export default {
       topbgApi.getTopBg().then(res => {
         this.topBg = res.data[0].pic;
         this.litpic = res.data[0].litpic;
+      });
+    },
+
+    // 默认搜索词
+    getSearchDefaultWords() {
+      getSearchDefaultWords().then(res => {
+        this.defaultSearchWords = res[0].show;
       });
     }
   }

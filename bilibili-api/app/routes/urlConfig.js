@@ -24,9 +24,9 @@ export const liveXhr = 'http://api.live.bilibili.com/bili/recom'
 
 // 番剧下方更新列表右侧新番放送表上侧
 export const slideshow = 'http://www.bilibili.com/index/slideshow/41.json'
+
 // 番剧下方更新列表右侧新番放送表下侧
 export const season = 'http://www.bilibili.com/api_proxy?app=bangumi&action=get_season_by_tag&page=1&tag_id=101&pagesize=4'
-
 
 // 轮播图右边总排行
 // 3日排行

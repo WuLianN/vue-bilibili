@@ -59,8 +59,9 @@ export default {
 
   created() {
     this.getBanner();
-    // this.getYesterday();
     this.getThreeDays();
+
+    // this.getYesterday();
     // this.getOneWeek();
   },
 

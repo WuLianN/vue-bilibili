@@ -6,9 +6,10 @@ const router = Router()
 
 // 默认搜索词
 router.get('/getSearchDefaultWords', async (ctx, next) => {
-  let response = await axios.get(ding)
+  let response = await axios.get(getSearchDefaultWords)
   ctx.body = response.data
 })
+
 // 顶部背景图
 router.get('/topbg', async (ctx, next) => {
   let response = await axios.get(topbg)

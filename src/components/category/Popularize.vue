@@ -16,7 +16,7 @@
 
     <div class="popularize-ad">
       <div class="online">在线人数: {{}}</div>
-      <el-image class="ad-img" :src="promoteAd[0].pic" alt />
+      <el-image class="ad-img" :src="promoteAd" alt />
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       promote: [],
-      promoteAd: []
+      promoteAd: ""
     };
   },
 
@@ -39,7 +39,7 @@ export default {
     getPromote() {
       promoteApi.promote().then(res => {
         this.promote = res.data;
-        this.promoteAd = res.promoteAd;
+        this.promoteAd = res.promoteAd[0].pic;
       });
     }
   }

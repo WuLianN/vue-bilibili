@@ -29,4 +29,7 @@ export const contentrank = serverRoot + '/contentrank'
 export const contentrankweek = serverRoot + '/contentrankweek'
 
 // 主站头部背景图
-export const topbg = serverRoot + '/topbg' 
+export const topbg = serverRoot + '/topbg'
+
+// 默认搜索词
+export const getSearchDefaultWords = serverRoot + '/getSearchDefaultWords'

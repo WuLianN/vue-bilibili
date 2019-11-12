@@ -83,3 +83,10 @@ export const topbgApi = {
 	}
 }
 
+// 默认搜索词
+export const getSearchDefaultWords = () => {
+	return axios.get(url.getSearchDefaultWords).then(response => {
+		return response.data;
+	})
+}
+
