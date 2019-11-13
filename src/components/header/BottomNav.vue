@@ -113,6 +113,7 @@ export default {
     width: 100%;
     height: 60px;
     position: relative;
+    margin: 10px 0;
 
   .bili-wrapper {
     margin: 0 auto;

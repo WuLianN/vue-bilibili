@@ -2,19 +2,30 @@
   <div class="category">
     <ChiefRecomment />
     <Popularize />
+    <Live :videoData="live" :category="category.live" />
+    <!-- <Basic :videoData="douga" :category="category.douga" />
+    <Basic :videoData="bangumi" :category="category.bangumi" />
     <Basic :videoData="music" :category="category.music" />
+    <Basic :videoData="dance" :category="category.dance" />
+    <Basic :videoData="game" :category="category.game" />
+    <Basic :videoData="technology" :category="category.technology" />
+    <Basic :videoData="life" :category="category.life" />
+    <Basic :videoData="kichiku" :category="category.kichiku" />
+    <Basic :videoData="fashion" :category="category.fashion" />
+    <Basic :videoData="ent" :category="category.ent" />-->
   </div>
 </template>
 
 <script>
 import ChiefRecomment from "@/components/category/ChiefRecomment";
 import Popularize from "@/components/category/Popularize";
+import Live from "@/components/category/Live";
 import Basic from "@/components/common/category/Basic";
-
-import { contentApi } from "@/api/index";
+import { contentApi, liveApi } from "@/api/index";
 export default {
   data() {
     return {
+      live: null,
       music: null,
       dance: null,
       bangumi: null,
@@ -28,6 +39,7 @@ export default {
       ent: null,
       douga: null,
       category: {
+        live: { title: "正在直播", position: "-141px -652px" },
         music: { title: "音乐", position: "-140px -266px" },
         dance: { title: "舞蹈", position: "-141px -461px" },
         bangumi: { title: "番剧", position: "-141px -140px" },
@@ -36,8 +48,8 @@ export default {
         life: { title: "生活", position: "-137px -970px" },
         kichiku: { title: "鬼畜", position: "-141px -332px" },
         guochuang: { title: "国创", position: "-140px -1611px" },
-        game: { title: "游戏", position: "-141px -525px" },
-        fashion: { title: "时尚", position: "-137px -970px" },
+        game: { title: "游戏", position: "-141px -203px" },
+        fashion: { title: "时尚", position: "-141px -718px" },
         ent: { title: "娱乐", position: "-141px -1032px" },
         douga: { title: "动画", position: "-141px -908px" },
         movie: { title: "电影", position: "-141px -396px" }
@@ -48,14 +60,25 @@ export default {
   components: {
     ChiefRecomment,
     Popularize,
+    Live,
     Basic
   },
 
   created() {
+    this.getLive();
     this.getContent();
   },
 
   methods: {
+    // 直播
+    getLive() {
+      liveApi.live().then(res => {
+        this.live = res.data;
+
+
+      });
+    },
+
     // 分类内容
     getContent() {
       contentApi.content().then(res => {

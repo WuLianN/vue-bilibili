@@ -1,11 +1,18 @@
 <template>
-  <div class="basic">
+  <div class="live">
     <div class="header">
-      <div class="header-left">
+      <div class="header-left" v-if="videoData">
         <i class="category-img" :style="{backgroundPosition:category.position}"></i>
         <span class="category-title">{{category.title}}</span>
-        <div class="category-newVideo">有新动态</div>
-        <div class="category-newCommit">最新投稿</div>
+        <div class="category-newVideo">
+          当前共有
+          <span class="online_total">{{videoData.online_total}}</span>
+          个在线直播
+        </div>
+        <div class="category-newCommit">
+          <i class="category-link-icon"></i>
+          {{videoData.text_link.text}}
+        </div>
       </div>
       <div class="header-right">
         <div class="read-push">
@@ -20,20 +27,11 @@
       </div>
     </div>
 
-    <div class="content">
-      <div class="video" v-for="(item, index) in videoData" :key="index">
+    <div class="content" v-if="videoData">
+      <div class="video" v-for="(item, index) in videoData.recommend" :key="index">
         <el-image class="video-img" :src="item.pic" alt></el-image>
         <p class="video-title">{{item.title}}</p>
-        <p class="video-count">
-          <span class="video-span">
-            <i class="video-view"></i>
-            {{item.stat.view}}
-          </span>
-          <span class="video-span">
-            <i class="video-danmaku"></i>
-            {{item.stat.danmaku}}
-          </span>
-        </p>
+        <p class="video-count">{{item.area_v2_parent_name}} · {{item.area_v2_name}}</p>
       </div>
     </div>
   </div>
@@ -48,14 +46,21 @@ export default {
   props: {
     videoData: Object,
     category: Object
-  }
+  },
+
+  created() {},
+
+  components: {},
+
+  methods: {}
 };
 </script>
 
 <style lang='less' scoped>
-@images: "../../../assets";
+@images: "../../assets";
+
 .link {
-  width: 48px;
+  width: 170px;
   height: 23.8px;
   margin: 0 10px 0 0;
   font-size: 12px;
@@ -63,7 +68,7 @@ export default {
   cursor: pointer;
 }
 
-.basic {
+.live {
   width: 900px;
   height: 381px;
   position: relative;
@@ -89,7 +94,7 @@ export default {
       }
 
       .category-title {
-        width: 48px;
+        width: 100px;
         height: 24px;
         font-size: 24px;
         line-height: 24px;
@@ -99,12 +104,25 @@ export default {
 
       .category-newVideo {
         .link;
-        position: relative;
-        color: #00a1d6;
+
+        .online_total {
+          color: #00a1d6;
+        }
       }
 
       .category-newCommit {
         .link;
+
+        .category-link-icon {
+          position: relative;
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 4px;
+          width: 14px;
+          height: 14px;
+          background: url("@{images}/icons.png");
+          background-position: -665px -1113px;
+        }
       }
     }
 
@@ -198,28 +216,7 @@ export default {
     .video-count {
       font-size: 12px;
       margin: 4px 0;
-
-      .video-span {
-        display: inline-block;
-        width: 80px;
-        height: 14px;
-      }
-
-      .video-view {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: url("@{images}/icons.png");
-        background-position: -282px -90px;
-      }
-
-      .video-danmaku {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: url("@{images}/icons.png");
-        background-position: -282px -218px;
-      }
+      color: #9ba3ab;
     }
   }
 }
