@@ -33,3 +33,4 @@ export const topbg = serverRoot + '/topbg'
 
 // 默认搜索词
 export const getSearchDefaultWords = serverRoot + '/getSearchDefaultWords'
+

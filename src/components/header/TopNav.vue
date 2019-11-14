@@ -8,7 +8,7 @@
           <ul class="nav-con-ul">
             <li class="nav-item">
               <a class="t special" href title="主站">
-                <!-- <i class="header-icon-bilibili-tv"></i> -->
+                <i class="header-icon-bilibili-tv"></i>
                 <span class="special-title">主站</span>
               </a>
             </li>
@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item">
               <a class="t" href title="下载APP">
-                <!-- <i class="header-icon-Navbar_mobile"></i> -->
+                <i class="header-icon-Navbar_mobile"></i>
                 下载APP
               </a>
             </li>
@@ -115,6 +115,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
+@images: "../../assets";
 .topNav {
   width: 100%;
   height: 170px;
@@ -182,26 +183,26 @@ export default {
         position: relative;
 
         .special-title {
-          // display: inline-block;
-          // width: 50px;
-          // height: 42px;
+          display: inline-block;
+          width: 50px;
+          height: 42px;
         }
 
         .header-icon-bilibili-tv {
           position: relative;
           display: inline-block;
-          width: 15px;
-          height: 42px;
-          // background: url("../assets/icons.png");
-          // background-position: -1000px -69px;
-          background: #222;
+          width: 17px;
+          height: 15px;
+          background: url("@{images}/icons.png");
+          background-position: -920px -87px;
         }
 
         .header-icon-Navbar_mobile {
           display: inline-block;
           width: 15px;
-          height: 42px;
-          background: #222;
+          height: 15px;
+          background: url("@{images}/icons.png");
+        background-position: -1367px -1175px;
         }
       }
 

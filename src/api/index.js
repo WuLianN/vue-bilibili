@@ -90,3 +90,5 @@ export const getSearchDefaultWords = () => {
 	})
 }
 
+// 视频播放链接
+export const link = 'https://www.bilibili.com/video/av'

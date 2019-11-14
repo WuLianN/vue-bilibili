@@ -3,7 +3,7 @@
     <ChiefRecomment />
     <Popularize />
     <Live :videoData="live" :category="category.live" />
-    <!-- <Basic :videoData="douga" :category="category.douga" />
+    <Basic :videoData="douga" :category="category.douga" />
     <Basic :videoData="bangumi" :category="category.bangumi" />
     <Basic :videoData="music" :category="category.music" />
     <Basic :videoData="dance" :category="category.dance" />
@@ -12,7 +12,8 @@
     <Basic :videoData="life" :category="category.life" />
     <Basic :videoData="kichiku" :category="category.kichiku" />
     <Basic :videoData="fashion" :category="category.fashion" />
-    <Basic :videoData="ent" :category="category.ent" />-->
+    <Basic :videoData="ent" :category="category.ent" />
+    <LiveRank :liveRankData="liveRank" />
   </div>
 </template>
 
@@ -21,11 +22,14 @@ import ChiefRecomment from "@/components/category/ChiefRecomment";
 import Popularize from "@/components/category/Popularize";
 import Live from "@/components/category/Live";
 import Basic from "@/components/common/category/Basic";
+import LiveRank from "@/components/rank/LiveRank";
 import { contentApi, liveApi } from "@/api/index";
+
 export default {
   data() {
     return {
       live: null,
+      liveRank: [],
       music: null,
       dance: null,
       bangumi: null,
@@ -38,6 +42,7 @@ export default {
       fashion: null,
       ent: null,
       douga: null,
+
       category: {
         live: { title: "正在直播", position: "-141px -652px" },
         music: { title: "音乐", position: "-140px -266px" },
@@ -61,7 +66,8 @@ export default {
     ChiefRecomment,
     Popularize,
     Live,
-    Basic
+    Basic,
+    LiveRank
   },
 
   created() {
@@ -74,8 +80,7 @@ export default {
     getLive() {
       liveApi.live().then(res => {
         this.live = res.data;
-
-
+        this.liveRank = res.data.ranking;
       });
     },
 

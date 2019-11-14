@@ -21,10 +21,21 @@
     </div>
 
     <div class="content">
-      <div class="video" v-for="(item, index) in videoData" :key="index">
+      <a
+        class="video"
+        v-for="(item, index) in videoData"
+        :key="index"
+        :href="`${link}${item.aid}`"
+        target="_blank"
+        @mouseover="showOther(index)"
+        @mouseout="closeOther(index)"
+      >
         <el-image class="video-img" :src="item.pic" alt></el-image>
-        <p class="video-title">{{item.title}}</p>
-        <p class="video-count">
+        <p
+          class="video-title"
+          :style="{color: isShowDetail[index]?'#00a1d6':'black'}"
+        >{{item.title}}</p>
+        <p class="video-count" v-show="!isShowDetail[index]">
           <span class="video-span">
             <i class="video-view"></i>
             {{item.stat.view}}
@@ -34,20 +45,56 @@
             {{item.stat.danmaku}}
           </span>
         </p>
-      </div>
+        <p class="video-duration" v-show="isShowDetail[index]">{{item.duration | formatSec}}</p>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import { link } from "@/api/index";
+import { toZero } from "@/util/transform";
 export default {
   data() {
-    return {};
+    return {
+      link: link,
+      isShowDetail: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    };
   },
 
   props: {
     videoData: Object,
     category: Object
+  },
+
+  filters: {
+    formatSec: function(num) {
+      let Tnum = parseInt(num);
+      let M = toZero(Math.floor((Tnum % 3600) / 60));
+      let S = toZero(Math.floor(Tnum % 60));
+      return M + ":" + S;
+    }
+  },
+
+  methods: {
+    showOther(index) {
+      this.$set(this.isShowDetail, index, true);
+    },
+
+    closeOther(index) {
+      this.$set(this.isShowDetail, index, false);
+    }
   }
 };
 </script>
@@ -174,6 +221,7 @@ export default {
     flex-flow: row wrap;
     position: relative;
     .video {
+      display: block;
       width: 160px;
       height: 148px;
       position: relative;
@@ -184,6 +232,18 @@ export default {
         height: 100px;
         border-radius: 4px;
       }
+
+      .video-duration {
+        width: 160px;
+        height: 20px;
+        position: absolute;
+        bottom: 48px;
+        font-size: 12px;
+        color: #99a2aa;
+        line-height: 20px;
+        text-indent: 5px;
+        color: #fff;
+      }
     }
 
     .video-title {
@@ -193,11 +253,13 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
       margin: 1px 0;
+      color: black;
     }
 
     .video-count {
       font-size: 12px;
       margin: 4px 0;
+      color: #99a2aa;
 
       .video-span {
         display: inline-block;

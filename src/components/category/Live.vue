@@ -28,11 +28,35 @@
     </div>
 
     <div class="content" v-if="videoData">
-      <div class="video" v-for="(item, index) in videoData.recommend" :key="index">
+      <a
+        class="video"
+        v-for="(item, index) in videoData.recommend"
+        :key="index"
+        @mouseover="showOther(index)"
+        @mouseout="closeOther(index)"
+        @click="watch"
+        :href="item.link"
+        target="_blank"
+      >
         <el-image class="video-img" :src="item.pic" alt></el-image>
-        <p class="video-title">{{item.title}}</p>
-        <p class="video-count">{{item.area_v2_parent_name}} · {{item.area_v2_name}}</p>
-      </div>
+        <p
+          class="video-title"
+          :style="{color: isShowDetail[index]?'#00a1d6':'black'}"
+        >{{item.title}}</p>
+
+        <p
+          class="video-count"
+          v-show="!isShowDetail[index]"
+        >{{item.area_v2_parent_name}} · {{item.area_v2_name}}</p>
+
+        <div class="video-detail" v-show="!isShowDetail[index]">
+          <span class="video-owner">{{item.uname}}</span>
+          <span class="video-view">
+            <i class="online-count"></i>
+            {{item.online}}
+          </span>
+        </div>
+      </a>
     </div>
   </div>
 </template>
@@ -40,7 +64,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      isShowDetail: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    };
   },
 
   props: {
@@ -52,7 +89,17 @@ export default {
 
   components: {},
 
-  methods: {}
+  methods: {
+    watch() {},
+
+    showOther(index) {
+      this.$set(this.isShowDetail, index, true);
+    },
+
+    closeOther(index) {
+      this.$set(this.isShowDetail, index, false);
+    }
+  }
 };
 </script>
 
@@ -192,6 +239,7 @@ export default {
     flex-flow: row wrap;
     position: relative;
     .video {
+      display: block;
       width: 160px;
       height: 148px;
       position: relative;
@@ -201,6 +249,50 @@ export default {
         width: 160px;
         height: 100px;
         border-radius: 4px;
+      }
+
+      .video-detail {
+        position: absolute;
+        width: 160px;
+        height: 20px;
+        bottom: 48px;
+        display: flex;
+        flex-flow: row nowrap;
+
+        .video-owner {
+          display: inline-block;
+          width: 80px;
+          height: 20px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: #fff;
+          font-weight: 200;
+          font-size: 12px;
+          line-height: 20px;
+          text-indent: 5px;
+        }
+
+        .video-view {
+          display: inline-block;
+          width: 80px;
+          height: 20px;
+          font-weight: 200;
+          font-size: 12px;
+          line-height: 20px;
+          color: #fff;
+          text-align: right;
+          overflow: hidden;
+          position: relative;
+          right: 4px;
+
+          .online-count {
+            display: inline-block;
+            width: 13px;
+            height: 10px;
+            background: url("@{images}/online.png");
+          }
+        }
       }
     }
 
