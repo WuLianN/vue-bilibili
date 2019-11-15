@@ -15,12 +15,14 @@
             </div>
       </div>-->
       <div class="threeDays">
-        <div
+        <a
           class="card"
           v-for="(item,index) in threeDaysRank"
           :key="index"
           @mouseover="showDetail(index)"
           @mouseout="closeDetail(index)"
+          :href="`${link}${item.aid}`"
+          target="_blank"
         >
           <div>
             <el-image class="card-img" :src="item.pic" lazy></el-image>
@@ -31,7 +33,7 @@
               <p class="card-play">播放: {{item.play}}</p>
             </div>
           </div>
-        </div>
+        </a>
       </div>
       <!-- <div class="oneWeek">
             <div v-for="(item,index) in oneWeekRank" :key="index">
@@ -45,10 +47,11 @@
 </template>
 
 <script>
-import { bannerApi, rankApi } from "../../api/index";
+import { bannerApi, rankApi, link } from "../../api/index";
 export default {
   data() {
     return {
+      link: link,
       banner: [],
       yesterdayRank: [],
       threeDaysRank: [],
@@ -142,6 +145,7 @@ export default {
         height: 100px;
         margin: 5px 5px;
         border-radius: 5%;
+        display: block;
       }
 
       .card-title {

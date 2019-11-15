@@ -82,6 +82,8 @@ export default {
         this.live = res.data;
         this.liveRank = res.data.ranking;
       });
+
+   
     },
 
     // 分类内容

@@ -8,10 +8,19 @@
     </div>
 
     <div class="popularize-content">
-      <div class="video-wrapper" v-for="(item, index) in promote" :key="index">
+      <a
+        class="video-wrapper"
+        v-for="(item, index) in promote"
+        :key="index"
+        @mouseover="showDetail(index)"
+        @mouseout="closeDetail(index)"
+        :href="item.url"
+        target="_blank"
+      >
         <el-image class="video-img" :src="item.pic" lazy></el-image>
-        <p class="video-title">{{item.name}}</p>
-      </div>
+        <p class="video-title" :style="{color: isShowDetail[index]?'#00a1d6':'black'}">{{item.name}}</p>
+        <p class="video-duration" v-show="isShowDetail[index]">{{item.archive.duration | formatSec}}</p>
+      </a>
     </div>
 
     <div class="popularize-ad">
@@ -22,12 +31,14 @@
 </template>
 
 <script>
-import { promoteApi } from "../../api/index";
+import { promoteApi, link } from "../../api/index";
 export default {
   data() {
     return {
       promote: [],
-      promoteAd: ""
+      promoteAd: "",
+      link: link,
+      isShowDetail: [false, false, false, false, false]
     };
   },
 
@@ -41,6 +52,14 @@ export default {
         this.promote = res.data;
         this.promoteAd = res.promoteAd[0].pic;
       });
+    },
+
+    showDetail(index) {
+      this.$set(this.isShowDetail, index, true);
+    },
+
+    closeDetail(index) {
+      this.$set(this.isShowDetail, index, false);
     }
   }
 };
@@ -87,9 +106,11 @@ export default {
 
     .video-wrapper {
       position: relative;
+      display: block;
       width: 160px;
-      height: 48px;
+      height: 148px;
       margin: 0 20px 20px 0;
+
       .video-img {
         width: 160px;
         height: 100px;
@@ -106,6 +127,14 @@ export default {
         word-break: break-all;
         overflow: hidden;
         text-align: left;
+      }
+
+      .video-duration {
+        position: absolute;
+        bottom: 50px;
+        left: 5px;
+        color: white;
+        font-size: 12px;
       }
     }
   }

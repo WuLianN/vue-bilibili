@@ -53,7 +53,7 @@
 
 <script>
 import { link } from "@/api/index";
-import { toZero } from "@/util/transform";
+
 export default {
   data() {
     return {
@@ -76,15 +76,6 @@ export default {
   props: {
     videoData: Object,
     category: Object
-  },
-
-  filters: {
-    formatSec: function(num) {
-      let Tnum = parseInt(num);
-      let M = toZero(Math.floor((Tnum % 3600) / 60));
-      let S = toZero(Math.floor(Tnum % 60));
-      return M + ":" + S;
-    }
   },
 
   methods: {

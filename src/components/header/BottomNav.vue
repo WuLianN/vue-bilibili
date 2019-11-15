@@ -5,27 +5,21 @@
         <ul class="bottomNav-menu">
           <li>
             <span class="icon home"></span>
-            <a href>首页</a>
+            <a class="link-a" href="https://www.bilibili.com">首页</a>
           </li>
+
           <li v-for="(item, index) in category" :key="index">
-            <span class="count">{{item.count}}</span>
-            <a href class="title">{{item.title}}</a>
+            <a :href="item.link" targett="_block" class="link">
+              <div class="count">{{item.count}}</div>
+              <div class="title">{{item.title}}</div>
+            </a>
           </li>
-          <li>
-            <span class="icon zhuanlan"></span>
-            <a href>专栏</a>
-          </li>
-          <li>
-            <span class="icon square"></span>
-            <a href>广场</a>
-          </li>
-          <li>
-            <span class="icon live"></span>
-            <a href>直播</a>
-          </li>
-          <li>
-            <span class="icon blackroom"></span>
-            <a href>小黑屋</a>
+
+          <li v-for="(item, index) in specialCategory" :key="index+100">
+            <a class="link-a" :href="item.link">
+              <div class="icon" :style="{backgroundPosition: item.position}"></div>
+              <div>{{item.title}}</div>
+            </a>
           </li>
         </ul>
       </div>
@@ -40,63 +34,101 @@ export default {
       category: [
         {
           title: "动画",
-          count: "999+"
+          count: "999+",
+          link: "https://www.bilibili.com/v/douga"
         },
         {
           title: "番剧",
-          count: 61
+          count: 61,
+          link: "https://www.bilibili.com/v/anime"
         },
         {
           title: "国创",
-          count: 468
+          count: 468,
+          link: "https://www.bilibili.com/v/guochuang"
         },
         {
           title: "音乐",
-          count: "999+"
+          count: "999+",
+          link: "https://www.bilibili.com/v/music"
         },
         {
           title: "舞蹈",
-          count: 108
+          count: 108,
+          link: "https://www.bilibili.com/v/dance"
         },
         {
           title: "游戏",
-          count: 999
+          count: 999,
+          link: "https://www.bilibili.com/v/game"
         },
         {
           title: "科技",
-          count: 482
+          count: 482,
+          link: "https://www.bilibili.com/v/technology"
         },
         {
           title: "数码",
-          count: 445
+          count: 445,
+          link: "https://www.bilibili.com/v/digital"
         },
         {
           title: "生活",
-          count: 988
+          count: 988,
+          link: "https://www.bilibili.com/v/life"
         },
         {
           title: "鬼畜",
-          count: 64
+          count: 64,
+          link: "https://www.bilibili.com/v/kichiku"
         },
         {
           title: "时尚",
-          count: 177
+          count: 177,
+          link: "https://www.bilibili.com/v/fashion"
         },
         {
           title: "广告",
-          count: 43
+          count: 43,
+          link: "https://www.bilibili.com/v/ad"
         },
         {
           title: "娱乐",
-          count: "999+"
+          count: "999+",
+          link: "https://www.bilibili.com/v/ent"
         },
         {
           title: "影视",
-          count: 702
+          count: 702,
+          link: "https://www.bilibili.com/v/cinephile"
         },
         {
           title: "放映厅",
-          count: 310
+          count: 310,
+          link: "https://www.bilibili.com/v/cinema"
+        }
+      ],
+
+      specialCategory: [
+        {
+          title: "专栏",
+          position: "-87px -1814px",
+          link: "https://www.bilibili.com/read/home"
+        },
+        {
+          title: "广场",
+          position: "-87px -2006px",
+          link: "https://www.bilibili.com/blackboard/x/act_list"
+        },
+        {
+          title: "直播",
+          position: "-87px -1878px",
+          link: "https://live.bilibili.com"
+        },
+        {
+          title: "小黑屋",
+          position: "-87px -1942px",
+          link: "https://www.bilibili.com/blackroom/ban"
         }
       ]
     };
@@ -110,10 +142,10 @@ export default {
 
 <style lang='less' scoped>
 .bottomNav {
-    width: 100%;
-    height: 60px;
-    position: relative;
-    margin: 10px 0;
+  width: 100%;
+  height: 60px;
+  position: relative;
+  margin: 10px 0;
 
   .bili-wrapper {
     margin: 0 auto;
@@ -149,36 +181,28 @@ export default {
           background-repeat: no-repeat;
         }
 
-        .zhuanlan {
-          background-position: -87px -1814px;
+        .link {
+          .count {
+            display: block;
+            text-align: center;
+            background: #ffafc9;
+            color: white;
+            border-radius: 20%;
+            font-size: 12px;
+            margin: 2px 0 3px 0;
+          }
+
+          .title {
+            display: block;
+            text-align: center;
+            color: black;
+            font-size: 15px;
+          }
         }
 
-        .square {
-          background-position: -87px -2006px;
-        }
-
-        .live {
-          background-position: -87px -1878px;
-        }
-
-        .blackroom {
-          background-position: -87px -1942px;
-        }
-
-        .count {
-          display: block;
-          text-align: center;
-          background: #ffafc9;
-          color: white;
-          border-radius: 20%;
-          font-size: 10px;
-          margin: 2px 0 3px 0;
-        }
-
-        .title {
-          display: block;
-          text-align: center;
+        .link-a {
           color: black;
+          font-size: 15px;
         }
       }
     }
