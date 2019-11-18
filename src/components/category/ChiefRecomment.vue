@@ -4,6 +4,7 @@
       <el-carousel indicator-position="none" trigger="click">
         <el-carousel-item v-for="(item,index) in banner" :key="index" height="300">
           <el-image :src="item.pic" lazy></el-image>
+          <span class="carousel-name">{{item.name}}</span>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -119,10 +120,22 @@ export default {
   .carousel {
     width: 440px;
     height: 220px;
+    position: relative;
 
     .carousel-img {
       width: 440px;
       height: 220px;
+    }
+
+    .carousel-name {
+      display: block;
+      width: 440px;
+      height: 20px;
+      color: #fff;
+      position: absolute;
+      bottom: 90px;
+      text-indent: 20px;
+      z-index: 10000;
     }
   }
 

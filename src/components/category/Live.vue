@@ -38,7 +38,7 @@
         :href="item.link"
         target="_blank"
       >
-        <el-image class="video-img" :src="item.pic" alt></el-image>
+        <el-image class="video-img" :src="isShowDetail[index]?item.system_cover:item.pic" alt></el-image>
         <p
           class="video-title"
           :style="{color: isShowDetail[index]?'#00a1d6':'black'}"
@@ -76,7 +76,8 @@ export default {
         false,
         false,
         false
-      ]
+      ],
+      isShowMask: false
     };
   },
 
@@ -94,10 +95,12 @@ export default {
 
     showOther(index) {
       this.$set(this.isShowDetail, index, true);
+     
     },
 
     closeOther(index) {
       this.$set(this.isShowDetail, index, false);
+  
     }
   }
 };

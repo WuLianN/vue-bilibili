@@ -65,7 +65,7 @@
     </div>
     <div class="topNav-bg" :style="{background: `url(${topBg})`}"></div>
     <div class="topNav-search">
-      <a class="link-ranking" href>
+      <a class="link-ranking" :href="linkRanking" target="_block">
         <span class="ranking-title">排行榜</span>
       </a>
       <form class="search-form" action>
@@ -86,7 +86,8 @@ export default {
     return {
       topBg: "",
       litpic: "",
-      defaultSearchWords: ""
+      defaultSearchWords: "",
+      linkRanking: "https://www.bilibili.com/ranking"
     };
   },
 
@@ -202,7 +203,7 @@ export default {
           width: 15px;
           height: 15px;
           background: url("@{images}/icons.png");
-        background-position: -1367px -1175px;
+          background-position: -1367px -1175px;
         }
       }
 

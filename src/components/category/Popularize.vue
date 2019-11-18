@@ -24,7 +24,7 @@
     </div>
 
     <div class="popularize-ad">
-      <div class="online">在线人数: {{}}</div>
+      <a class="online" :href="online" target="_block">在线列表</a>
       <el-image class="ad-img" :src="promoteAd" alt />
     </div>
   </div>
@@ -38,6 +38,7 @@ export default {
       promote: [],
       promoteAd: "",
       link: link,
+      online: "https://www.bilibili.com/video/online.html",
       isShowDetail: [false, false, false, false, false]
     };
   },
@@ -147,6 +148,8 @@ export default {
     right: -260px;
 
     .online {
+      display: block;
+      color: #6d757a;
       position: relative;
       height: 34px;
       line-height: 34px;
@@ -155,6 +158,10 @@ export default {
       text-align: center;
       background: #e5e9ef;
       white-space: nowrap;
+    }
+
+    .online:hover {
+      color: #00a1d6;
     }
 
     .ad-img {
