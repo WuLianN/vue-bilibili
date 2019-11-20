@@ -25,9 +25,10 @@ router.get('/ranking', async (ctx, next) => {
 
 // contentrank -分类下三日排行
 router.post('/contentrank', async (ctx, next) => {
-	const body = ctx.request.body
+  const body = ctx.request.body
+
   let categoryId = body.categoryId
-	
+
   let url = rankbase + categoryId + '-3day.json'
   let response = await axios.get(url)
   ctx.body = response.data
@@ -37,7 +38,7 @@ router.post('/contentrank', async (ctx, next) => {
 router.post('/contentrankweek', async (ctx, next) => {
   const body = ctx.request.body
   let categoryId = body.categoryId
-  
+
   let url = rankbase + categoryId + '-week.json'
   let response = await axios.get(url)
   ctx.body = response.data

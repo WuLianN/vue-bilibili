@@ -34,3 +34,6 @@ export const topbg = serverRoot + '/topbg'
 // 默认搜索词
 export const getSearchDefaultWords = serverRoot + '/getSearchDefaultWords'
 
+// 缩略图
+export const videoShot = serverRoot + '/videoShot'
+

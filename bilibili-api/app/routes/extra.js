@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import axios from 'axios'
-import { getSearchDefaultWords, topbg, hot, slideshow, season, recommend } from './urlConfig'
+import { getSearchDefaultWords, topbg, hot, slideshow, season, recommend, videoShot } from './urlConfig'
 
 const router = Router()
 
@@ -40,5 +40,15 @@ router.get('/recommend', async (ctx, next) => {
   ctx.body = response.data
 })
 
+// 缩略图
+router.post('/videoShot', async (ctx, next) => {
+  const body = ctx.request.body;
+  let index = 1;
+  let aid = body.aid;
+  let url = `${videoShot}?index=${index}&aid=${aid}`;
+  console.log(url)
+  let response = await axios.get(url)
+  ctx.body = response.data
+})
 
 export default router

@@ -1,5 +1,9 @@
 # vue-bilibili
 
+![](https://github.com/WuLianN/vue-bilibili/blob/master/src/assets/display.gif)
+
+
+
 注：api的来源 https://github.com/lybenson/bilibili-vue
 
 ``` 

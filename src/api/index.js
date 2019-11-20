@@ -92,3 +92,10 @@ export const getSearchDefaultWords = () => {
 
 // 视频播放链接
 export const link = 'https://www.bilibili.com/video/av'
+
+// videoShot
+export const videoShot = (params) => {
+	return axios.post(url.videoShot, params).then(response => {
+		return response.data;
+	})
+}
