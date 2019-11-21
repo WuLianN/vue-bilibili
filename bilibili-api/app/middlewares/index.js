@@ -1,8 +1,10 @@
 async function catchError(ctx, next) {
   try {
     await next();
-    if (ctx.status === 404) ctx.throw(404);
-  } catch(err) {
+    if (ctx.status === 404) {
+      ctx.throw(404);
+    }
+  } catch (err) {
     let status = err.status || 500;
     // let message = e.message || 'Server Error!'
     ctx.status = status;

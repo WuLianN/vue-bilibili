@@ -4,6 +4,15 @@
 
 
 
+
+![](https://github.com/WuLianN/vue-bilibili/blob/master/src/assets/preview.gif)
+
+
+
+
+
+
+
 注：api的来源 https://github.com/lybenson/bilibili-vue
 
 ``` 
@@ -29,25 +38,15 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+## 开启Node服务
 
-``` 
-npm run build
 ```
+切换目录
+cd bilibili-api
 
-### Run your tests
+安装依赖
+npm run install
 
-``` 
-npm run test
+运行程序
+npm run dev
 ```
-
-### Lints and fixes files
-
-``` 
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-

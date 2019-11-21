@@ -46,9 +46,9 @@ router.post('/videoShot', async (ctx, next) => {
   let index = 1;
   let aid = body.aid;
   let url = `${videoShot}?index=${index}&aid=${aid}`;
-  console.log(url)
   let response = await axios.get(url)
   ctx.body = response.data
 })
+
 
 export default router

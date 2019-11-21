@@ -45,15 +45,14 @@ export default {
       promote: [],
       image: [],
       promoteAd: "",
-      lastIndex: "",
+      lastIndex: -1,
       backgroundImage: "",
       backgroundPosition: "",
       item_width: Number,
       imageCount: Number,
       link: link,
       online: "https://www.bilibili.com/video/online.html",
-      isShowDetail: [false, false, false, false, false],
-      isFirstTime: true
+      isShowDetail: [false, false, false, false, false]
     };
   },
 
@@ -74,8 +73,6 @@ export default {
     },
 
     closeDetail(index) {
-      // 记录上一个索引
-      this.lastIndex = index;
       this.$set(this.isShowDetail, index, false);
     },
 
@@ -83,56 +80,40 @@ export default {
     getVideoShot(event, item, index) {
       const width = 160;
       let aid = item.archive.aid;
-      let total, nums, x, y;
       let offsetX = event.offsetX;
+      let total, nums, x, y;
 
-      if (this.isFirstTime) {
-        this.isFirstTime = false;
+      // if (index !== this.lastIndex && aid) {
+      //   this.lastIndex = index;
+      //   videoShot({ aid }).then(res => {
+      //     const result = res.data;
+      //     total = result.index.length;
+      //     this.imgCount = result.image.length;
+      //     this.image = result.image;
+      //     this.item_width = Math.ceil(width / total);
+      //   });
+      // }
 
-        videoShot({ aid }).then(res => {
-          const result = res.data;
-          // 雪碧图中的小图数量
-          total = result.index.length;
-          // 雪碧图张数
-          this.imgCount = result.image.length;
-          // 雪碧图数组
-          this.image = result.image;
-          //
-          this.item_width = Math.ceil(width / total);
-        });
-      }
+      // // 雪碧图张数 大于 1
+      // if (this.imgCount > 1 && this.image.length > 0) {
+      //   let range = width / this.imgCount;
+      //   for (let i = 1; i < this.imgCount; i++) {
+      //     while (offsetX < range * i) {
+      //       this.backgroundImage = `http:${this.image[i - 1]}`;
+      //     }
+      //     this.backgroundImage = `http:${this.image[i]}`;
+      //   }
+      // } else {
+      //   this.backgroundImage = `url('http:${this.image[0]}')`;
+      // }
 
-      if (index !== this.lastIndex) {
-        this.lastIndex = index;
-        videoShot({ aid }).then(res => {
-          const result = res.data;
-          total = result.index.length;
-          this.imgCount = result.image.length;
-          this.image = result.image;
-          this.item_width = Math.ceil(width / total);
-        });
-      }
+      // if (this.item_width) {
+      //   nums = Math.ceil(offsetX / this.item_width);
+      //   x = (nums - 1) % 10;
+      //   y = Math.ceil(nums / 10) - 1;
 
-      // 雪碧图张数 大于 1
-      if (this.imgCount > 1 && this.image.length > 0) {
-        let range = width / this.imgCount;
-        for (let i = 1; i < this.imgCount; i++) {
-          while (offsetX < range * i) {
-            this.backgroundImage = `http:${this.image[i - 1]}`;
-          }
-          this.backgroundImage = `http:${this.image[i]}`;
-        }
-      } else {
-        this.backgroundImage = `url('http:${this.image[0]}')`;
-      }
-
-      if (this.item_width) {
-        nums = Math.ceil(offsetX / this.item_width);
-        x = (nums - 1) % 10;
-        y = Math.ceil(nums / 10) - 1;
-
-        this.backgroundPosition = `${-x * 160}px ${-y * 90}px`;
-      }
+      //   this.backgroundPosition = `${-x * 160}px ${-y * 90}px`;
+      // }
     }
   }
 };
@@ -198,6 +179,9 @@ export default {
       }
 
       .video-title {
+        position: absolute;
+        top: 100px;
+        left: 0;
         font-size: 12px;
         padding-top: 8px;
         height: 40px;
