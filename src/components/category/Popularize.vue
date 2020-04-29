@@ -12,7 +12,7 @@
         class="video-wrapper"
         v-for="(item, index) in promote"
         :key="index"
-        @mouseover="showDetail(index)"
+        @mouseover="showDetail(item,index)"
         @mouseout="closeDetail(index)"
         @mousemove="getVideoShot($event, item, index)"
         :href="item.url"
@@ -52,7 +52,9 @@ export default {
       imageCount: Number,
       link: link,
       online: "https://www.bilibili.com/video/online.html",
-      isShowDetail: [false, false, false, false, false]
+      isShowDetail: [false, false, false, false, false],
+      controlGetTimes: [true, true, true, true, true],
+      videoShotData: []
     };
   },
 
@@ -63,13 +65,28 @@ export default {
   methods: {
     getPromote() {
       promoteApi.promote().then(res => {
-        this.promote = res.data;
+        this.promote = res.data.slice(1, 6);
         this.promoteAd = res.promoteAd[0].pic;
       });
     },
 
-    showDetail(index) {
+    showDetail(item, index) {
       this.$set(this.isShowDetail, index, true);
+      const aid = item.archive.aid;
+
+      if (this.controlGetTimes[index] === true) {
+        videoShot({ aid }).then(res => {
+          // 使用videoShotData，存储雪碧图数据
+          this.$set(this.videoShotData, index, res.data);
+
+          // console.log(this.videoShotData)
+
+          // 该雪碧图已经加载了，之后不再加载
+          this.$set(this.controlGetTimes, index, false);
+
+          // console.log(this.controlGetTimes)
+        });
+      }
     },
 
     closeDetail(index) {
@@ -79,41 +96,39 @@ export default {
     // 获取雪碧图
     getVideoShot(event, item, index) {
       const width = 160;
-      let aid = item.archive.aid;
       let offsetX = event.offsetX;
-      let total, nums, x, y;
+      // console.log(item, index)
+      // console.log(aid, offsetX);
 
-      // if (index !== this.lastIndex && aid) {
-      //   this.lastIndex = index;
-      //   videoShot({ aid }).then(res => {
-      //     const result = res.data;
-      //     total = result.index.length;
-      //     this.imgCount = result.image.length;
-      //     this.image = result.image;
-      //     this.item_width = Math.ceil(width / total);
-      //   });
-      // }
+      // console.log(this.videoShotData[index]);
 
-      // // 雪碧图张数 大于 1
-      // if (this.imgCount > 1 && this.image.length > 0) {
-      //   let range = width / this.imgCount;
-      //   for (let i = 1; i < this.imgCount; i++) {
-      //     while (offsetX < range * i) {
-      //       this.backgroundImage = `http:${this.image[i - 1]}`;
-      //     }
-      //     this.backgroundImage = `http:${this.image[i]}`;
-      //   }
-      // } else {
-      //   this.backgroundImage = `url('http:${this.image[0]}')`;
-      // }
+      if (this.videoShotData[index] !== undefined) {
+        let total = this.videoShotData[index].index.length;
+        let imgCount = this.videoShotData[index].image.length;
+        let image = this.videoShotData[index].image;
+        let item_width = Math.ceil(width / total);
 
-      // if (this.item_width) {
-      //   nums = Math.ceil(offsetX / this.item_width);
-      //   x = (nums - 1) % 10;
-      //   y = Math.ceil(nums / 10) - 1;
+        // 雪碧图张数 大于 1
+        if (imgCount > 1 && image.length > 0) {
+          let range = width / imgCount;
+          for (let i = 1; i < imgCount; i++) {
+            while (offsetX < range * i) {
+              this.backgroundImage = `http:${image[i - 1]}`;
+            }
+            this.backgroundImage = `http:${image[i]}`;
+          }
+        } else {
+          this.backgroundImage = `url('http:${image[0]}')`;
+        }
 
-      //   this.backgroundPosition = `${-x * 160}px ${-y * 90}px`;
-      // }
+        if (item_width) {
+          let nums = Math.ceil(offsetX / item_width);
+          let x = (nums - 1) % 10;
+          let y = Math.ceil(nums / 10) - 1;
+
+          this.backgroundPosition = `${-x * 160}px ${-y * 90}px`;
+        }
+      }
     }
   }
 };
